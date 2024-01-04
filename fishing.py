@@ -37,9 +37,10 @@ def compute_icon_type(img):
 
 
 def click(coords):
-    sleep_time = random.randint(0,3)
+    sleep_time = random.uniform(0,2)
     pag.moveTo(x=coords[0], y=coords[1], duration=0.0)
     time.sleep(sleep_time)
+    print(sleep_time)
     pag.mouseDown()
     pag.mouseUp()
 
@@ -52,9 +53,8 @@ while True:
         blink = compute_icon_type(pop_img)
         st = compute_icon_type(need_start)
         wn = compute_icon_type(waring)
-        print(st)
         #print(blink)
-        #print(wn)
+        print(st)
 
 
 
@@ -72,6 +72,7 @@ while True:
                 file.write('1')
 
             break
+
 
 
 

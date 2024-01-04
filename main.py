@@ -1,6 +1,4 @@
 import subprocess
-#from fishing import needcharge
-from fishing import click,move
 import mss
 import numpy as np
 import time
@@ -22,4 +20,4 @@ while True:
         subprocess.run(["python", "./fishing.py"])
 
 
-    time.sleep(1)
+    time.sleep(5)

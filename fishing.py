@@ -12,9 +12,9 @@ Warning = {'left': 1041, 'top': 689, 'width': 5, 'height': 5}
 check = {'left': 1610, 'top': 750, 'width': 5, 'height': 5}
 start_position = {'left': 1710, 'top': 800, 'width': 5, 'height': 5}
 pag.PAUSE = 0.08
+needfix = 0
 # 688>793 H
 # 1550 > 1650 Width
-
 
 def compute_icon_type(img):
     mean = np.mean(img, axis=(0, 1))
@@ -37,8 +37,9 @@ def compute_icon_type(img):
 
 
 def click(coords):
+    sleep_time = random.randint(0,3)
     pag.moveTo(x=coords[0], y=coords[1], duration=0.0)
-    time.sleep(1)
+    time.sleep(sleep_time)
     pag.mouseDown()
     pag.mouseUp()
 
@@ -62,13 +63,14 @@ while True:
 
         if blink == 'blink':
             print('tab!!!')
-            sleep_time = random.randint(0,3)
             click(fishing)
 
         if wn == 'yellow':
             print("we have to recharge")
             click(confirm)
-            needcharge = 1
+            with open('./needfix.txt' ,'w') as file:
+                file.write('1')
+
             break
 
 

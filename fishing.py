@@ -36,9 +36,9 @@ def compute_icon_type(img):
     return result
 
 
-def move(coords):
-    pag.moveTo(x=coords[0], y=coords[1], duration=0.0)
 def click(coords):
+    pag.moveTo(x=coords[0], y=coords[1], duration=0.0)
+    time.sleep(1)
     pag.mouseDown()
     pag.mouseUp()
 
@@ -58,18 +58,15 @@ while True:
 
 
         if st =='need start':
-            move(fishing)
             click(fishing)
 
         if blink == 'blink':
             print('tab!!!')
-            move(fishing)
             sleep_time = random.randint(0,3)
             click(fishing)
 
         if wn == 'yellow':
             print("we have to recharge")
-            move(confirm)
             click(confirm)
             needcharge = 1
             break

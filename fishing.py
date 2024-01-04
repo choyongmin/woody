@@ -2,6 +2,9 @@ import pyautogui as pag
 import mss
 import cv2
 import numpy as np
+import time
+import random
+
 
 fishing = [1715, 827]
 confirm = [1041, 689]
@@ -51,25 +54,27 @@ while True:
         print(st)
         #print(blink)
         #print(wn)
-        
+
 
 
         if st =='need start':
             move(fishing)
             click(fishing)
-            
+
         if blink == 'blink':
             print('tab!!!')
             move(fishing)
+            sleep_time = random.randint(0,3)
             click(fishing)
+
         if wn == 'yellow':
             print("we have to recharge")
             move(confirm)
             click(confirm)
-            needcharge = 1 
+            needcharge = 1
             break
 
 
-        
+
 
 

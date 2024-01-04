@@ -6,14 +6,16 @@ import numpy as np
 import time
 
 
-buyingpy = 'C:/Users/whdyd/OneDrive/바탕 화면/일/woody/buying.py'
-Xpoint = [1812, 135]
-needfix = 0
 while True:
-    if needfix == 1:
+    with open('./needfix.txt','r') as file:
+        content = file.read()
+
+    if int(content) == 1:
         print("--------------------------start recharging-------------------------------")
         subprocess.run(["python", "./buying.py"])
-        needfix = 0
+        with open('./needfix.txt', 'w') as file:
+            file.write('0')
+        print("recharge finished'")
 
     else:
         print ("===============================starting fishing==================================")

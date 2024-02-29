@@ -71,7 +71,17 @@ while True:
             wn = compute_icon_type(waring)
         #If the specific color is found on the screen
             target_x, target_y = find_color_on_screen(expected_color)
-            if target_x is not None and target_y is not None:
+            print("target :" , target_x,target_y)
+
+        if st =='need start':
+            click(fishing)
+        elif st =='black' :
+            click(fishing)
+        #if blink == 'blink':
+         #   print('tab!!!')
+          #  click(fishing)
+
+        if target_x is not None and target_y is not None:
                 # Calculate random click position within the specified range
                 random_x = random.randint(target_x - random_click_range, target_x + random_click_range)
                 random_y = random.randint(target_y - random_click_range, target_y + random_click_range)
@@ -81,19 +91,8 @@ while True:
                 click_y = min(max(random_y, target_y - click_distance_y), target_y + click_distance_y)
                 here = (click_x,click_y)
                 # Perform the click
+                print(here)
                 click(here)
-
-                print (here)
-                print(st)
-
-
-        if st =='need start':
-            click(fishing)
-        elif st =='black' :
-            click(fishing)
-        #if blink == 'blink':
-         #   print('tab!!!')
-          #  click(fishing)
 
         if wn == 'yellow':
             print("we have to recharge")

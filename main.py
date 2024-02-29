@@ -20,4 +20,4 @@ while True:
         subprocess.run(["python", "./fishing.py"])
 
 
-    time.sleep(5)
+    time.sleep(1)

@@ -5,10 +5,10 @@ import numpy as np
 import pyautogui as pag
 from fishing import click
 
-bong = [397,933]
-bong_tab=[397,789]
-raw = [542,933]
-raw_fish = [629,788]
+bong = [100,984]
+bong_tab=[97,851]
+raw = [277,984]
+raw_fish = [376,859]
 
 click(bong)
 time.sleep(1)

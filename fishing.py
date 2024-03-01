@@ -11,7 +11,7 @@ check = {'left': 1563, 'top': 759, 'width': 5, 'height': 5} #blinkimage
 start_position = {'left': 1747, 'top': 853, 'width': 5, 'height': 5} #낚시대버튼
 pag.PAUSE = 0.08
 needfix = 0
-expected_color = (0, 230, 250)  # Example: (0, 230, 250)
+expected_color = (0, 0, 0)  # Example: (0, 230, 250)
 click_distance_x = 190  # Example: 20 pixels from x axis
 click_distance_y = 120  # Example: 20 pixels from y axis
 # 688>793 H
@@ -48,16 +48,12 @@ def click(coords):
 
 
 def find_color_on_screen(expected_color):
-    # Capture the screen
     screenshot = pag.screenshot()
-    # Check for the specific color on the entire screen
-    for x in range(screenshot.width):
-        for y in range(screenshot.height):
-            actual_color = screenshot.getpixel((x, y))
-            if actual_color == expected_color:
-                return x, y
-    return None,None
-
+    pixels = np.array(screenshot)
+    matches = np.where(np.all(pixels == expected_color, axis=-1))
+    if matches[0].size > 0:
+        return matches[1][0], matches[0][0]
+    return None, None
 
 
 

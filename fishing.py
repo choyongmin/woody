@@ -11,7 +11,7 @@ check = {'left': 1563, 'top': 759, 'width': 5, 'height': 5} #blinkimage
 start_position = {'left': 1747, 'top': 853, 'width': 5, 'height': 5} #낚시대버튼
 pag.PAUSE = 0.08
 needfix = 0
-expected_color = (0, 0, 0)  # Example: (0, 230, 250)
+expected_color = (0, 230, 250)  # Example: (0, 230, 250)
 click_distance_x = 190  # Example: 20 pixels from x axis
 click_distance_y = 120  # Example: 20 pixels from y axis
 # 688>793 H
@@ -49,13 +49,17 @@ def click(coords):
 
 def find_color_on_screen(expected_color):
     screenshot = pag.screenshot()
-    pixels = np.array(screenshot)
+    screenshot_rgb = screenshot.convert("RGB")
+    pixels = np.array(screenshot_rgb)
     matches = np.where(np.all(pixels == expected_color, axis=-1))
     if matches[0].size > 0:
         return matches[1][0], matches[0][0]
-    return None, None
+    else:
+        print("couldnt find color")
+    return 0,0
 
 
+a=0
 
 while True:
         with mss.mss() as sct:
@@ -67,7 +71,7 @@ while True:
             wn = compute_icon_type(waring)
         #If the specific color is found on the screen
             target_x, target_y = find_color_on_screen(expected_color)
-            print("target :" , target_x,target_y)
+            print( "target :" , target_x,target_y )
 
         if st =='need start':
             click(fishing)
@@ -87,7 +91,7 @@ while True:
                 click_y = min(max(random_y, target_y - click_distance_y), target_y + click_distance_y)
                 here = (click_x,click_y)
                 # Perform the click
-                print(here)
+                print("sibal ",here)
                 click(here)
 
         if wn == 'yellow':

@@ -11,14 +11,12 @@ check = {'left': 1563, 'top': 759, 'width': 5, 'height': 5} #blinkimage
 start_position = {'left': 1747, 'top': 853, 'width': 5, 'height': 5} #낚시대버튼
 pag.PAUSE = 0.08
 needfix = 0
-expected_color = (0, 230, 250)  # Example: (0, 230, 250)
+expected_color = (86, 172, 152)  # 낚시버튼(86,172,152)
 click_distance_x = 190  # Example: 20 pixels from x axis
 click_distance_y = 120  # Example: 20 pixels from y axis
 # 688>793 H
 random_click_range = 10  # Example: 10 pixels
 # 1550 > 1650 Width
-
-
 
 def compute_icon_type(img):
     mean = np.mean(img, axis=(0, 1))
@@ -59,9 +57,9 @@ def find_color_on_screen(expected_color):
     return 0,0
 
 
-a=0
 
 while True:
+    try:
         with mss.mss() as sct:
             pop_img = np.array(sct.grab(check))[:, :, :3]
             need_start = np.array(sct.grab(start_position))[:, :, :3]
@@ -77,11 +75,11 @@ while True:
             click(fishing)
         elif st =='black' :
             click(fishing)
-        #if blink == 'blink':
-         #   print('tab!!!')
-          #  click(fishing)
+        if blink == 'blink':
+          #  print('tab!!!')
+             #click(fishing)
 
-        if target_x is not None and target_y is not None:
+        #if target_x is not None and target_y is not None:
                 # Calculate random click position within the specified range
                 random_x = random.randint(target_x - random_click_range, target_x + random_click_range)
                 random_y = random.randint(target_y - random_click_range, target_y + random_click_range)
@@ -89,8 +87,9 @@ while True:
                 # Calculate the click position within the specified distance from the detected color position
                 click_x = min(max(random_x, target_x - click_distance_x), target_x + click_distance_x)
                 click_y = min(max(random_y, target_y - click_distance_y), target_y + click_distance_y)
-                here = (click_x,click_y)
+                here = (target_x+80,target_y+60)
                 # Perform the click
+                print("target: ",target_x,target_y)
                 print("sibal ",here)
                 click(here)
 
@@ -100,7 +99,9 @@ while True:
             with open('./needfix.txt' ,'w') as file:
                 file.write('1')
             break
-
+    except pag.ImageNotFoundException:
+        print("이미지를 찾지 못했습니다. 다시 시도합니다.")
+        time.sleep(1)
 
 
 
